@@ -1,0 +1,14 @@
+{
+  "name": "coffeehub2",
+  "version": "1.0.0",
+  "description": "An app to share your favourite coffee spots",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "Ilya Meerovich",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
