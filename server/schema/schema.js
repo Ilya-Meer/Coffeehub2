@@ -1,70 +1,21 @@
 const graphql = require('graphql');
+const types = require('./types');
+
 const Coffeeshop = require('../models/coffeeshop');
 const Comment = require('../models/comment');
+
+const {
+  CoffeeshopType,
+  CommentType,
+} = types;
 
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
-  GraphQLInt,
   GraphQLList,
   GraphQLSchema } = graphql;
 
-
-const comments = [
-  {
-    id: '1',
-    text: 'This place sucks',
-    author: '55',
-    coffeeshopID: '1',
-  },
-  {
-    id: '2',
-    text: 'Blabbityblah',
-    author: '51',
-    coffeeshopID: '1',
-  },
-];
-
-
-const CoffeeshopType = new GraphQLObjectType({
-  name: 'Coffeeshop',
-  fields: () => ({
-    id: {
-      type: GraphQLID
-    },
-    name: {
-      type: GraphQLString,
-    },
-    image: {
-      type: GraphQLString,
-    },
-    comments: {
-      type: new GraphQLList(CommentType),
-      resolve(parent, args) {
-        return Comment.find({ coffeeshopID: parent.id });
-      }
-    }
-  })
-});
-
-const CommentType = new GraphQLObjectType({
-  name: 'Comment',
-  fields: () => ({
-    id: {
-      type: GraphQLID,
-    },
-    text: {
-      type: GraphQLString,
-    },
-    author: {
-      type: GraphQLString,
-    },
-    coffeeshopID: {
-      type: GraphQLString,
-    }
-  })
-});
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
