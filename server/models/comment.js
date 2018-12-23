@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 // SCHEMA SETUP
 const commentSchema = new mongoose.Schema({
-  text: String, 
+  text: String,
+  coffeeshopID: String,
   author: {
     id:{
       type: mongoose.Schema.Types.ObjectId,

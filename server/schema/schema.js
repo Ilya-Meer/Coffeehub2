@@ -1,4 +1,6 @@
 const graphql = require('graphql');
+const Coffeeshop = require('../models/coffeeshop');
+const Comment = require('../models/comment');
 
 const {
   GraphQLObjectType,
@@ -8,19 +10,6 @@ const {
   GraphQLList,
   GraphQLSchema } = graphql;
 
-
-const shops = [
-  {
-    name: 'Starbucks',
-    id: '1',
-    image: 'http://nuvomagazine.com/wp-content/uploads/2017/05/Vancouver-Reserve-Bar.jpg'
-  },
-  {
-    name: 'Blenz',
-    id: '2',
-    image: 'http://blenz.com/wp-content/uploads/2014/07/location_spotlight_gardencity2.jpg'
-  },
-];
 
 const comments = [
   {
@@ -53,7 +42,7 @@ const CoffeeshopType = new GraphQLObjectType({
     comments: {
       type: new GraphQLList(CommentType),
       resolve(parent, args) {
-        return comments.filter(c => c.coffeeshopID === parent.id)
+        return Comment.find({ coffeeshopID: parent.id });
       }
     }
   })
@@ -88,7 +77,7 @@ const RootQuery = new GraphQLObjectType({
         },
       },
       resolve(parent, args) {
-        return shops.find(shop => shop.id === args.id);
+        return Coffeeshop.findById(args.id);
       },
     },
     comment: {
@@ -99,24 +88,72 @@ const RootQuery = new GraphQLObjectType({
         },
       },
       resolve(parent, args) {
-        return comments.find(comment => comment.id === args.id);
+        return Comment.find({ coffeeshopID: parent.id });
       },
     },
     coffeeshops: {
       type: new GraphQLList(CoffeeshopType),
       resolve(parent, args) {
-        return shops;
+        return Coffeeshop.find();
       }
     },
     comments: {
       type: new GraphQLList(CommentType),
       resolve(parent, args) {
-        return comments;
+        return Comment.find();
       }
     }
   }
 });
 
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addComment: {
+      type: CommentType,
+      args: {
+        author: {
+          type: GraphQLString,
+        },
+        text: {
+          type: GraphQLString
+        },
+        coffeeshopID: {
+          type: GraphQLString
+        }
+      },
+      resolve(parent, args) {
+        // This comment is the Mongoose model, not the Graph QL Type
+        let comment = new Comment({
+          text: args.text,
+          coffeeshopID: args.coffeeshopID,
+        })
+        return comment.save();
+      }
+    },
+    addCoffeeshop: {
+      type: CoffeeshopType,
+      args: {
+        name: {
+          type: GraphQLString
+        },
+        image: {
+          type: GraphQLString
+        }
+      },
+      resolve(parent, args) {
+        // This coffeeshop is the Mongoose model, not the Graph QL Type
+        let coffeeshop = new Coffeeshop({
+          name: args.name,
+          image: args.image,
+        })
+        return coffeeshop.save();
+      }
+    }
+  }
+})
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation: Mutation,
 });
