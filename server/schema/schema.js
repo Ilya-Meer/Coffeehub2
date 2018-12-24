@@ -14,7 +14,9 @@ const {
   GraphQLString,
   GraphQLID,
   GraphQLList,
-  GraphQLSchema } = graphql;
+  GraphQLSchema,
+  GraphQLNonNull,
+} = graphql;
 
 
 const RootQuery = new GraphQLObjectType({
@@ -64,10 +66,10 @@ const Mutation = new GraphQLObjectType({
       type: CommentType,
       args: {
         author: {
-          type: GraphQLString,
+          type: new GraphQLNonNull(GraphQLString),
         },
         text: {
-          type: GraphQLString
+          type: new GraphQLNonNull(GraphQLString),
         },
         coffeeshopID: {
           type: GraphQLString
@@ -86,7 +88,7 @@ const Mutation = new GraphQLObjectType({
       type: CoffeeshopType,
       args: {
         name: {
-          type: GraphQLString
+          type: new GraphQLNonNull(GraphQLString),
         },
         image: {
           type: GraphQLString
