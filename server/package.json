@@ -9,6 +9,7 @@
   "author": "Ilya Meerovich",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "express": "^4.16.4",
