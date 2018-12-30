@@ -32,7 +32,7 @@ class CoffeeshopList extends Component {
 
     if (data && data.loading) {
       return (
-        <div>Loading data...</div>
+        <h1 style={{ color: 'white' }}>Loading data...</h1>
       )
     }
 
