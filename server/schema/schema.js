@@ -92,7 +92,10 @@ const Mutation = new GraphQLObjectType({
         },
         image: {
           type: GraphQLString
-        }
+        },
+        author: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
       },
       resolve(parent, args) {
         // This coffeeshop is the Mongoose model, not the Graph QL Type

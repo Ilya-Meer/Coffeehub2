@@ -6,8 +6,10 @@ const getCoffeeshopQuery = gql`
       id
       name
       image
+      author
       comments {
         text
+        author
       }
     }
   }

@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js';
+import jwtDecode from 'jwt-decode';
 import history from './history';
 
 class Auth {
@@ -17,8 +18,7 @@ class Auth {
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
-    this.getAccessToken = this.getAccessToken.bind(this);
-    this.getIdToken = this.getIdToken.bind(this);
+    this.getUser = this.getUser.bind(this);
     this.setSession = this.setSession.bind(this);
     this.renewSession = this.renewSession.bind(this);
   }
@@ -39,12 +39,11 @@ class Auth {
     });
   }
 
-  getAccessToken() {
-    return this.accessToken;
-  }
-
-  getIdToken() {
-    return this.idToken;
+  getUser() {
+    if (!localStorage.getItem('id_token')) {
+      return {};
+    }
+    return jwtDecode(localStorage.getItem('id_token'));
   }
 
   setSession(authResult) {
@@ -90,7 +89,7 @@ class Auth {
     // Check whether the current time is past the
     // access token's expiry time
     let expiresAt = this.expiresAt;
-    return new Date().getTime() < expiresAt;
+    return localStorage.getItem('access_token') && localStorage.getItem('id_token') && (new Date().getTime() < expiresAt);
   }
 }
 

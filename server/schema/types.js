@@ -17,6 +17,9 @@ const CoffeeshopType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
+    author: {
+      type: GraphQLString,
+    },
     image: {
       type: GraphQLString,
     },

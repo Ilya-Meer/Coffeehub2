@@ -30,6 +30,12 @@ class CoffeeshopList extends Component {
       data
     } = this.props;
 
+    if (!data) {
+      return (
+        <p>Add a Coffeeshop!</p>
+      )
+    }
+
     if (data && data.loading) {
       return (
         <h1 style={{ color: 'white' }}>Loading data...</h1>
