@@ -12,7 +12,7 @@ const AppRouter = () => (
   <Router history={history}>
     <Switch>
       <Route exact path="/" render={() => <Home auth={auth} />}/>
-      <Route path="/new" render={() => <CoffeeshopPage auth={auth} />}/>
+      <Route path="/create" render={() => <CoffeeshopPage auth={auth} />}/>
       <Route component={NotFoundPage} />
     </Switch>
   </Router>

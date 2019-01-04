@@ -27,7 +27,7 @@ class Home extends Component {
         <CoffeeshopList />
 
         <div>
-          <Link to="/new">Add a new shop!</Link>
+          <Link to="/create">Add a new shop!</Link>
         </div>
 
       </div>

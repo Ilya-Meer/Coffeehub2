@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { addCoffeeshopMutation } from '../../queries/queries';
+import { graphql } from 'react-apollo';
+
 import PropTypes from 'prop-types';
 
 class CoffeeshopPage extends Component {
@@ -28,6 +31,30 @@ class CoffeeshopPage extends Component {
     }));
   }
 
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const {
+      auth,
+      mutate: addCoffeeshopMutation,
+    } = this.props;
+
+    const {
+      coffeeshopName,
+      imageURL,
+    } = this.state;
+
+    const author = auth.getUser().sub;
+
+    const variables = {
+      name: coffeeshopName,
+      image: imageURL,
+      author,
+    };
+
+    addCoffeeshopMutation({ variables });
+  }
+
   renderForm = () => {
     const {
       onSubmit,
@@ -39,7 +66,7 @@ class CoffeeshopPage extends Component {
     } = this.state;
 
     return (
-      <form onSubmit={onSubmit}>
+      <form onSubmit={this.onSubmit}>
         <label htmlFor="coffeeshopName">
           Coffeeshop Name:
           <input
@@ -58,6 +85,7 @@ class CoffeeshopPage extends Component {
             value={imageURL}
           />
         </label>
+        <button type="submit">Add Coffeeshop</button>
       </form>
     )
   }
@@ -69,4 +97,4 @@ class CoffeeshopPage extends Component {
   }
 }
 
-export default withRouter(CoffeeshopPage);
+export default withRouter(graphql(addCoffeeshopMutation)(CoffeeshopPage));

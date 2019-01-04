@@ -14,4 +14,14 @@ const getCoffeeshopQuery = gql`
     }
   }
 `
-export { getCoffeeshopQuery };
+
+const addCoffeeshopMutation = gql`
+  mutation($name: String!, $image: String, $author: String!) {
+    addCoffeeshop(name: $name, image: $image, author: $author) {
+      name
+      id
+    }
+  }
+`
+
+export { getCoffeeshopQuery, addCoffeeshopMutation };
