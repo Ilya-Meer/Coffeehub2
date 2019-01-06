@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
+import { firebase } from '../../firebase';
 import './styles.css';
 
-const Header = ({ text }) => (
-  <div className="main">
-    <h1>{text}</h1>
-  </div>
-);
+class Header extends Component {
+  logout = () => {
+    const { history } = this.props;
+
+    firebase.auth().signOut()
+      .then(() => {
+        localStorage.removeItem('user');
+      })
+      .then(() => {
+        history.push('/');
+      });
+  }
+  render() {
+    return (
+      <Switch>
+        <Route
+          exact
+          path="/login"  
+        >
+        </Route>
+        <Route>
+          <div className="main">
+            <h1>I am the header! Hear me roar!"</h1>
+            <button onClick={this.logout}>Logout</button>
+          </div>
+        </Route>
+      </Switch>
+    )
+  }
+};
 
 export default Header;

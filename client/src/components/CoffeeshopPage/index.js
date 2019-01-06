@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { addCoffeeshopMutation } from '../../queries/queries';
 import { graphql } from 'react-apollo';
 
@@ -35,7 +35,6 @@ class CoffeeshopPage extends Component {
     e.preventDefault();
 
     const {
-      auth,
       mutate: addCoffeeshopMutation,
     } = this.props;
 
@@ -44,7 +43,7 @@ class CoffeeshopPage extends Component {
       imageURL,
     } = this.state;
 
-    const author = auth.getUser().sub;
+    const author = '';
 
     const variables = {
       name: coffeeshopName,
@@ -57,36 +56,37 @@ class CoffeeshopPage extends Component {
 
   renderForm = () => {
     const {
-      onSubmit,
-    } = this.props;
-
-    const {
       coffeeshopName,
       imageURL,
     } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <label htmlFor="coffeeshopName">
-          Coffeeshop Name:
-          <input
-            type="text"
-            id="coffeeshopName"
-            onChange={(e) => this.handleChange(e)}
-            value={coffeeshopName}
-          />
-        </label>
-        <label htmlFor="coffeeshopName">
-          Image URL:
-          <input
-            type="text"
-            id="imageURL"
-            onChange={(e) => this.handleChange(e)}
-            value={imageURL}
-          />
-        </label>
-        <button type="submit">Add Coffeeshop</button>
-      </form>
+      <React.Fragment>
+        <form onSubmit={this.onSubmit}>
+          <label htmlFor="coffeeshopName">
+            Coffeeshop Name:
+            <input
+              type="text"
+              id="coffeeshopName"
+              onChange={(e) => this.handleChange(e)}
+              value={coffeeshopName}
+            />
+          </label>
+          <label htmlFor="coffeeshopName">
+            Image URL:
+            <input
+              type="text"
+              id="imageURL"
+              onChange={(e) => this.handleChange(e)}
+              value={imageURL}
+            />
+          </label>
+          <button type="submit">Add Coffeeshop</button>
+        </form>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+      </React.Fragment>
     )
   }
 
