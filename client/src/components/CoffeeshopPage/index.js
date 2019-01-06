@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FirebaseContext } from '../../firebase/firebaseContext';
 import { addCoffeeshopMutation } from '../../queries/queries';
 import { graphql } from 'react-apollo';
 
@@ -31,7 +32,7 @@ class CoffeeshopPage extends Component {
     }));
   }
 
-  onSubmit = (e) => {
+  onSubmit = (e, author) => {
     e.preventDefault();
 
     const {
@@ -42,8 +43,6 @@ class CoffeeshopPage extends Component {
       coffeeshopName,
       imageURL,
     } = this.state;
-
-    const author = '';
 
     const variables = {
       name: coffeeshopName,
@@ -61,32 +60,38 @@ class CoffeeshopPage extends Component {
     } = this.state;
 
     return (
-      <React.Fragment>
-        <form onSubmit={this.onSubmit}>
-          <label htmlFor="coffeeshopName">
-            Coffeeshop Name:
-            <input
-              type="text"
-              id="coffeeshopName"
-              onChange={(e) => this.handleChange(e)}
-              value={coffeeshopName}
-            />
-          </label>
-          <label htmlFor="coffeeshopName">
-            Image URL:
-            <input
-              type="text"
-              id="imageURL"
-              onChange={(e) => this.handleChange(e)}
-              value={imageURL}
-            />
-          </label>
-          <button type="submit">Add Coffeeshop</button>
-        </form>
-        <div>
-          <Link to="/">Home</Link>
-        </div>
-      </React.Fragment>
+      <FirebaseContext.Consumer>
+        {currentUser => {
+          return (
+            <React.Fragment>
+              <form onSubmit={(e) => this.onSubmit(e, currentUser)}>
+                <label htmlFor="coffeeshopName">
+                  Coffeeshop Name:
+                  <input
+                    type="text"
+                    id="coffeeshopName"
+                    onChange={(e) => this.handleChange(e)}
+                    value={coffeeshopName}
+                  />
+                </label>
+                <label htmlFor="coffeeshopName">
+                  Image URL:
+                  <input
+                    type="text"
+                    id="imageURL"
+                    onChange={(e) => this.handleChange(e)}
+                    value={imageURL}
+                  />
+                </label>
+                <button type="submit">Add Coffeeshop</button>
+              </form>
+              <div>
+                <Link to="/">Home</Link>
+              </div>
+            </React.Fragment>
+          )
+        }}
+      </FirebaseContext.Consumer>
     )
   }
 
@@ -97,4 +102,4 @@ class CoffeeshopPage extends Component {
   }
 }
 
-export default withRouter(graphql(addCoffeeshopMutation)(CoffeeshopPage));
+export default graphql(addCoffeeshopMutation)(CoffeeshopPage);

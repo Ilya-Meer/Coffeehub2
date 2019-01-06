@@ -4,6 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import AppRouter, { history } from './routes'
 import { firebase } from './firebase';
+import { FirebaseProvider } from './firebase/firebaseContext';
 import * as serviceWorker from './serviceWorker';
 
 const client = new ApolloClient({
@@ -11,14 +12,17 @@ const client = new ApolloClient({
 });
 
 const app = (
-  <ApolloProvider client={client}>
-    <AppRouter />
-  </ApolloProvider>  
+  <FirebaseProvider>
+    <ApolloProvider client={client}>
+      <AppRouter />
+    </ApolloProvider>  
+  </FirebaseProvider>
 );
 
 const root = document.getElementById('root');
 
 let hasRendered = false;
+
 const renderApp = () => {
   if (!hasRendered) {
     render(app, root);   
@@ -33,11 +37,9 @@ render(
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    localStorage.setItem('user', user.uid);
     renderApp();
   } else {
     firebase.auth().signOut().then(() => {
-      localStorage.removeItem('user');
       renderApp();
       history.push('/');
     })

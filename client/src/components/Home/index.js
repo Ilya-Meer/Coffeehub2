@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CoffeeshopList from '../CoffeeshopList';
 import './styles.css';
 
@@ -16,4 +16,4 @@ class Home extends Component {
   }
 }
 
-export default withRouter(Home);
+export default Home;

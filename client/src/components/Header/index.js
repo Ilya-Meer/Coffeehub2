@@ -10,9 +10,6 @@ class Header extends Component {
 
     firebase.auth().signOut()
       .then(() => {
-        localStorage.removeItem('user');
-      })
-      .then(() => {
         history.push('/');
       });
   }
