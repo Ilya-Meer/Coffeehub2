@@ -1,5 +1,3 @@
-import { StyleSheet } from 'aphrodite';
-
 // layout
 
 export const baseSpacingUnit = 10;
@@ -9,11 +7,3 @@ export const baseSpacingUnit = 10;
 export const fontFamilyMain = 'Spectral';
 
 // colours
-
-export default StyleSheet.create({
-  bodyText: {
-    fontFamily: fontFamilyMain,
-    fontWeight: 500,
-    fontSize: baseSpacingUnit * 1.8,
-  },
-});
