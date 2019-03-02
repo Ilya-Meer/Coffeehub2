@@ -20,11 +20,7 @@ const AppRouter = () => (
           <React.Fragment>
             <Header history={history} />
             <Switch>
-              <Route
-                exact
-                path="/"
-                component={Home}
-              />
+              <Route exact path="/" component={Home} />
               <PublicRoute
                 path="/login"
                 component={LoginPage}
@@ -35,13 +31,11 @@ const AppRouter = () => (
                 component={CoffeeshopPage}
                 loggedIn={currentUser}
               />
-              <Route
-                component={NotFoundPage}
-              />
+              <Route component={NotFoundPage} />
             </Switch>
           </React.Fragment>
         </Router>
-      )
+      );
     }}
   </FirebaseContext.Consumer>
 );
