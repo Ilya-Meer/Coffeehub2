@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { FirebaseContext } from '../../firebase/firebaseContext';
-import { addCoffeeshopMutation } from '../../queries/queries';
+import { FirebaseContext } from '../../../firebase/firebaseContext';
+import { addCoffeeshopMutation } from '../../../queries/queries';
 import { graphql } from 'react-apollo';
 
 import PropTypes from 'prop-types';
@@ -10,39 +10,34 @@ class CoffeeshopPage extends Component {
   state = {
     coffeeshopName: '',
     imageURL: '',
-  }
+  };
 
   static propTypes = {
     onSubmit: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     onSubmit: null,
-  }
+  };
 
-  handleChange = (e) => {
+  handleChange = e => {
     e.preventDefault();
 
-    let change = {}
+    let change = {};
     change[e.target.id] = e.target.value;
 
     this.setState(() => ({
       ...this.state,
       ...change,
     }));
-  }
+  };
 
   onSubmit = (e, author) => {
     e.preventDefault();
 
-    const {
-      mutate: addCoffeeshopMutation,
-    } = this.props;
+    const { mutate: addCoffeeshopMutation } = this.props;
 
-    const {
-      coffeeshopName,
-      imageURL,
-    } = this.state;
+    const { coffeeshopName, imageURL } = this.state;
 
     const variables = {
       name: coffeeshopName,
@@ -51,26 +46,23 @@ class CoffeeshopPage extends Component {
     };
 
     addCoffeeshopMutation({ variables });
-  }
+  };
 
   renderForm = () => {
-    const {
-      coffeeshopName,
-      imageURL,
-    } = this.state;
+    const { coffeeshopName, imageURL } = this.state;
 
     return (
       <FirebaseContext.Consumer>
         {currentUser => {
           return (
             <React.Fragment>
-              <form onSubmit={(e) => this.onSubmit(e, currentUser)}>
+              <form onSubmit={e => this.onSubmit(e, currentUser)}>
                 <label htmlFor="coffeeshopName">
                   Coffeeshop Name:
                   <input
                     type="text"
                     id="coffeeshopName"
-                    onChange={(e) => this.handleChange(e)}
+                    onChange={e => this.handleChange(e)}
                     value={coffeeshopName}
                   />
                 </label>
@@ -79,7 +71,7 @@ class CoffeeshopPage extends Component {
                   <input
                     type="text"
                     id="imageURL"
-                    onChange={(e) => this.handleChange(e)}
+                    onChange={e => this.handleChange(e)}
                     value={imageURL}
                   />
                 </label>
@@ -89,16 +81,14 @@ class CoffeeshopPage extends Component {
                 <Link to="/">Home</Link>
               </div>
             </React.Fragment>
-          )
+          );
         }}
       </FirebaseContext.Consumer>
-    )
-  }
+    );
+  };
 
   render() {
-    return (
-      this.renderForm()
-    );
+    return this.renderForm();
   }
 }
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import Header from '../components/Header';
-import Home from '../components/Home';
-import CoffeeshopPage from '../components/CoffeeshopPage';
-import NotFoundPage from '../components/NotFoundPage';
-import LoginPage from '../components/LoginPage';
+import Header from '../components/layout/Header';
+import Home from '../components/pages/Home';
+import CoffeeshopPage from '../components/pages/CoffeeshopPage';
+import NotFoundPage from '../components/pages/NotFoundPage';
+import LoginPage from '../components/pages/LoginPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import { FirebaseContext } from '../firebase/firebaseContext';

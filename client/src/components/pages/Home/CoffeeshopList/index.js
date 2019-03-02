@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import Masonry from 'react-masonry-component';
 
-import { getCoffeeshopQuery } from '../../queries/queries';
+import { getCoffeeshopQuery } from '../../../../queries/queries';
 
 class CoffeeshopList extends Component {
   static propTypes = {
