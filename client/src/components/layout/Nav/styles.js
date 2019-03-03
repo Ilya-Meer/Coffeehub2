@@ -1,8 +1,12 @@
-import { StyleSheet } from 'aphrodite';
+import { StyleSheet } from 'aphrodite/no-important';
+
+import { gradient } from '../../../global/styles';
 
 export default StyleSheet.create({
   main: {
-    letterSpacing: '2px',
-    textAlign: 'center',
+    padding: '2em',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    background: gradient,
   },
 });

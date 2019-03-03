@@ -1,4 +1,4 @@
-import { StyleSheet } from 'aphrodite';
+import { StyleSheet } from 'aphrodite/no-important';
 import { fontFamilyMain, baseSpacingUnit } from '../../../global/styles';
 
 export default StyleSheet.create({

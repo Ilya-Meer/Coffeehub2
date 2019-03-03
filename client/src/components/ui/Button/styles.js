@@ -1,18 +1,37 @@
-import { StyleSheet } from 'aphrodite';
-import { fontFamilyMain, baseSpacingUnit } from '../../../global/styles';
+import { StyleSheet } from 'aphrodite/no-important';
+import { colours, fontFamilySecondary } from '../../../global/styles';
 
 export default StyleSheet.create({
   button: {
     margin: 0,
-    padding: '5px 20px',
+    padding: '12px 35px',
+    fontSize: '12px',
+    fontFamily: fontFamilySecondary,
     textTransform: 'uppercase',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    ':hover': {
+      transition: 'all 0.2s',
+    },
   },
   primary: {
-    color: 'red',
-    backgroundColor: 'green',
+    color: colours.white,
+    backgroundColor: colours.navy,
+    border: `1px solid ${colours.navy}`,
+    ':hover': {
+      color: colours.navy,
+      backgroundColor: colours.white,
+      border: `1px solid ${colours.navy}`,
+    },
   },
   secondary: {
-    color: 'green',
-    backgroundColor: 'red',
+    color: colours.navy,
+    backgroundColor: colours.white,
+    border: `1px solid ${colours.navy}`,
+    ':hover': {
+      color: 'red',
+      backgroundColor: 'black',
+      border: `1px solid ${colours.navy}`,
+    },
   },
 });

@@ -50,7 +50,7 @@ class CoffeeshopList extends Component {
     return (
       <Masonry
         options={{
-          gutter: 20,
+          gutter: 10,
         }}
       >
         {coffeeshops}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'aphrodite';
+import { css } from 'aphrodite/no-important';
 import styles from './styles';
 
 const Heading = ({ children }) => (

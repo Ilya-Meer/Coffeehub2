@@ -1,10 +1,8 @@
-import { StyleSheet } from 'aphrodite';
+import { StyleSheet } from 'aphrodite/no-important';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   page: {
     margin: '0 auto',
     padding: '0 24px',
   },
 });
-
-export default styles;

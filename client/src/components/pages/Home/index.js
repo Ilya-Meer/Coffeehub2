@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import { css } from 'aphrodite';
+import { css } from 'aphrodite/no-important';
 
 import Page from '../../layout/Page';
 import CoffeeshopList from './CoffeeshopList';
 import Heading from '../../ui/Heading';
-import Subheading from '../../ui/Subheading';
 
-// import styles from './styles';
+import styles from './styles';
+
+console.log(styles.tagline);
 
 class Home extends Component {
   render() {
     return (
       <Page>
-        <Heading>Coffeeshops</Heading>
-        <Subheading>Browse all coffeeshops.</Subheading>
+        <div className={css(styles.pageTitle)}>
+          <Heading>Coffeeshops</Heading>
+          <p className={css(styles.tagline)}>Browse all coffeeshops.</p>
+        </div>
         <CoffeeshopList />
         <div>
           <Link to="/create">Add a new shop!</Link>
