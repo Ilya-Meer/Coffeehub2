@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import Nav from '../components/layout/Header';
+import Header from '../components/layout/Header';
 import Home from '../components/pages/Home';
 import CoffeeshopPage from '../components/pages/CoffeeshopPage';
 import NotFoundPage from '../components/pages/NotFoundPage';
@@ -18,7 +18,7 @@ const AppRouter = () => (
       return (
         <Router history={history}>
           <React.Fragment>
-            <Nav history={history} />
+            <Header history={history} />
             <Switch>
               <Route exact path="/" component={Home} />
               <PublicRoute

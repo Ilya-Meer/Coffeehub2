@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { css } from 'aphrodite/no-important';
 import styles from './styles';
 
-const Button = ({ children, type, variant }) => (
-  <button type={type} className={css(styles.button, styles[variant])}>
+const Button = ({ children, type, variant, onClick }) => (
+  <button
+    className={css(styles.button, styles[variant])}
+    type={type}
+    onClick={onClick}
+  >
     {children}
   </button>
 );
