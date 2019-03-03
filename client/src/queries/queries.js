@@ -18,6 +18,24 @@ const GET_COFFEESHOPS = gql`
   }
 `;
 
+const GET_SINGLE_COFFEESHOP = gql`
+  query($id: ID) {
+    coffeeshop(id: $id) {
+      id
+      name
+      image
+      description
+      pros
+      cons
+      author
+      comments {
+        text
+        author
+      }
+    }
+  }
+`;
+
 /* prettier-ignore */
 const ADD_COFFEESHOP = gql`
   mutation($name: String!, $image: String, $description: String, $pros: String, $cons: String $author: String!) {
@@ -28,4 +46,4 @@ const ADD_COFFEESHOP = gql`
   }
 `;
 
-export { GET_COFFEESHOPS, ADD_COFFEESHOP };
+export { GET_COFFEESHOPS, GET_SINGLE_COFFEESHOP, ADD_COFFEESHOP };

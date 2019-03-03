@@ -6,7 +6,7 @@ import { Query } from 'react-apollo';
 import Page from '../../layout/Page';
 import Heading from '../../ui/Heading';
 
-import { GET_COFFEESHOPS } from '../../../queries/queries';
+import { GET_SINGLE_COFFEESHOP } from '../../../queries/queries';
 
 import styles from './styles';
 
@@ -19,15 +19,13 @@ class ShowShopPage extends Component {
     const { match } = this.props;
 
     return (
-      <Query query={GET_COFFEESHOPS}>
+      <Query query={GET_SINGLE_COFFEESHOP} variables={{ id: match.params.id }}>
         {({ data, loading }) => {
           if (loading) {
             return <h1 style={{ color: 'white' }}>Loading data...</h1>;
           }
 
-          const shop = data.coffeeshops.find(
-            shop => shop.id === match.params.id
-          );
+          const { coffeeshop: shop } = data;
 
           return (
             <Page>
