@@ -8,8 +8,6 @@ import Heading from '../../ui/Heading';
 
 import styles from './styles';
 
-console.log(styles.tagline);
-
 class Home extends Component {
   render() {
     return (

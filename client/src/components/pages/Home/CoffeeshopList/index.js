@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import Masonry from 'react-masonry-component';
+import CoffeeshopThumbnail from '../CoffeeshopThumbnail';
 
 import { getCoffeeshopQuery } from '../../../../queries/queries';
 
@@ -15,23 +16,7 @@ class CoffeeshopList extends Component {
   };
 
   getCoffeeshops = items => {
-    const getComments = comment => <p key={comment.text}>{comment.text}</p>;
-
-    const coffeeshops = items.map(item => {
-      return (
-        <div key={item.id}>
-          <p>{item.name}</p>
-          <img
-            src={item.image}
-            alt="Coffeeshop"
-            style={{ maxWidth: '250px' }}
-          />
-          {item.comments.map(getComments)}
-        </div>
-      );
-    });
-
-    return coffeeshops;
+    return items.map(item => <CoffeeshopThumbnail key={item.id} {...item} />);
   };
 
   render() {
@@ -51,7 +36,9 @@ class CoffeeshopList extends Component {
       <Masonry
         options={{
           gutter: 10,
+          fitWidth: true,
         }}
+        style={{ margin: '0 auto' }}
       >
         {coffeeshops}
       </Masonry>
