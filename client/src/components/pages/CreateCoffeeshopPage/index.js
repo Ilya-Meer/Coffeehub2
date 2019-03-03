@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FirebaseContext } from '../../../firebase/firebaseContext';
-import { addCoffeeshopMutation } from '../../../queries/queries';
+import { ADD_COFFEESHOP } from '../../../queries/queries';
 import { css } from 'aphrodite';
 import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
@@ -140,4 +140,4 @@ class CreateCoffeeshopPage extends Component {
   }
 }
 
-export default graphql(addCoffeeshopMutation)(CreateCoffeeshopPage);
+export default graphql(ADD_COFFEESHOP)(CreateCoffeeshopPage);

@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-const getCoffeeshopQuery = gql`
+const GET_COFFEESHOPS = gql`
   {
     coffeeshops {
       id
@@ -19,7 +19,7 @@ const getCoffeeshopQuery = gql`
 `;
 
 /* prettier-ignore */
-const addCoffeeshopMutation = gql`
+const ADD_COFFEESHOP = gql`
   mutation($name: String!, $image: String, $description: String, $pros: String, $cons: String $author: String!) {
     addCoffeeshop(name: $name, image: $image, description: $description, pros: $pros, cons: $cons, author: $author) {
       name
@@ -28,4 +28,4 @@ const addCoffeeshopMutation = gql`
   }
 `;
 
-export { getCoffeeshopQuery, addCoffeeshopMutation };
+export { GET_COFFEESHOPS, ADD_COFFEESHOP };
