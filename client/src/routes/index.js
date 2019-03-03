@@ -4,6 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 import Header from '../components/layout/Header';
 import Home from '../components/pages/Home';
 import CreateCoffeeshopPage from '../components/pages/CreateCoffeeshopPage';
+import ShowShopPage from '../components/pages/ShowShopPage';
 import NotFoundPage from '../components/pages/NotFoundPage';
 import LoginPage from '../components/pages/LoginPage';
 import PrivateRoute from './PrivateRoute';
@@ -31,6 +32,7 @@ const AppRouter = () => (
                 component={CreateCoffeeshopPage}
                 loggedIn={currentUser}
               />
+              <Route path="/shops/:id" component={ShowShopPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </React.Fragment>
