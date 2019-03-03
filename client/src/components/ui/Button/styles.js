@@ -3,6 +3,7 @@ import { colours, fontFamilySecondary } from '../../../global/styles';
 
 export default StyleSheet.create({
   button: {
+    maxWidth: 200,
     margin: 0,
     padding: '12px 35px',
     fontSize: '12px',

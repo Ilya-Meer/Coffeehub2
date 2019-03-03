@@ -3,7 +3,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import Header from '../components/layout/Header';
 import Home from '../components/pages/Home';
-import CoffeeshopPage from '../components/pages/CoffeeshopPage';
+import CreateCoffeeshopPage from '../components/pages/CreateCoffeeshopPage';
 import NotFoundPage from '../components/pages/NotFoundPage';
 import LoginPage from '../components/pages/LoginPage';
 import PrivateRoute from './PrivateRoute';
@@ -28,7 +28,7 @@ const AppRouter = () => (
               />
               <PrivateRoute
                 path="/create"
-                component={CoffeeshopPage}
+                component={CreateCoffeeshopPage}
                 loggedIn={currentUser}
               />
               <Route component={NotFoundPage} />

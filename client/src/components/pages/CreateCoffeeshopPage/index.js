@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FirebaseContext } from '../../../firebase/firebaseContext';
 import { addCoffeeshopMutation } from '../../../queries/queries';
+import { css } from 'aphrodite';
 import { graphql } from 'react-apollo';
-
 import PropTypes from 'prop-types';
 
-class CoffeeshopPage extends Component {
+import styles from './styles';
+
+import Page from '../../layout/Page';
+import Heading from '../../ui/Heading';
+import Button from '../../ui/Button';
+
+class CreateCoffeeshopPage extends Component {
   state = {
     coffeeshopName: '',
     imageURL: '',
@@ -55,8 +61,17 @@ class CoffeeshopPage extends Component {
       <FirebaseContext.Consumer>
         {currentUser => {
           return (
-            <React.Fragment>
-              <form onSubmit={e => this.onSubmit(e, currentUser)}>
+            <Page>
+              <div className={css(styles.pageTitle)}>
+                <Heading>Add a Coffeeshop</Heading>
+                <p className={css(styles.tagline)}>
+                  Tell others about your find.
+                </p>
+              </div>
+              <form
+                onSubmit={e => this.onSubmit(e, currentUser)}
+                className={css(styles.form)}
+              >
                 <label htmlFor="coffeeshopName">
                   Coffeeshop Name:
                   <input
@@ -75,12 +90,12 @@ class CoffeeshopPage extends Component {
                     value={imageURL}
                   />
                 </label>
-                <button type="submit">Add Coffeeshop</button>
+                <Button type="submit">Add Coffeeshop</Button>
               </form>
               <div>
                 <Link to="/">Home</Link>
               </div>
-            </React.Fragment>
+            </Page>
           );
         }}
       </FirebaseContext.Consumer>
@@ -92,4 +107,4 @@ class CoffeeshopPage extends Component {
   }
 }
 
-export default graphql(addCoffeeshopMutation)(CoffeeshopPage);
+export default graphql(addCoffeeshopMutation)(CreateCoffeeshopPage);
