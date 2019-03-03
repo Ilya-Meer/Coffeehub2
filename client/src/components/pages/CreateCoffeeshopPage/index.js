@@ -16,6 +16,9 @@ class CreateCoffeeshopPage extends Component {
   state = {
     coffeeshopName: '',
     imageURL: '',
+    description: '',
+    pros: '',
+    cons: '',
   };
 
   static propTypes = {
@@ -43,11 +46,14 @@ class CreateCoffeeshopPage extends Component {
 
     const { mutate: addCoffeeshopMutation } = this.props;
 
-    const { coffeeshopName, imageURL } = this.state;
+    const { coffeeshopName, imageURL, description, pros, cons } = this.state;
 
     const variables = {
       name: coffeeshopName,
       image: imageURL,
+      description,
+      pros,
+      cons,
       author,
     };
 
@@ -55,7 +61,7 @@ class CreateCoffeeshopPage extends Component {
   };
 
   renderForm = () => {
-    const { coffeeshopName, imageURL } = this.state;
+    const { coffeeshopName, imageURL, description, pros, cons } = this.state;
 
     return (
       <FirebaseContext.Consumer>
@@ -81,13 +87,40 @@ class CreateCoffeeshopPage extends Component {
                     value={coffeeshopName}
                   />
                 </label>
-                <label htmlFor="coffeeshopName">
+                <label htmlFor="imageURL">
                   Image URL:
                   <input
                     type="text"
                     id="imageURL"
                     onChange={e => this.handleChange(e)}
                     value={imageURL}
+                  />
+                </label>
+                <label htmlFor="description">
+                  Description:
+                  <input
+                    type="text"
+                    id="description"
+                    onChange={e => this.handleChange(e)}
+                    value={description}
+                  />
+                </label>
+                <label htmlFor="pros">
+                  Pros:
+                  <input
+                    type="text"
+                    id="pros"
+                    onChange={e => this.handleChange(e)}
+                    value={pros}
+                  />
+                </label>
+                <label htmlFor="cons">
+                  Cons:
+                  <input
+                    type="text"
+                    id="cons"
+                    onChange={e => this.handleChange(e)}
+                    value={cons}
                   />
                 </label>
                 <Button type="submit">Add Coffeeshop</Button>

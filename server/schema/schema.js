@@ -4,10 +4,7 @@ const types = require('./types');
 const Coffeeshop = require('../models/coffeeshop');
 const Comment = require('../models/comment');
 
-const {
-  CoffeeshopType,
-  CommentType,
-} = types;
+const { CoffeeshopType, CommentType } = types;
 
 const {
   GraphQLObjectType,
@@ -17,7 +14,6 @@ const {
   GraphQLSchema,
   GraphQLNonNull,
 } = graphql;
-
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -48,15 +44,15 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(CoffeeshopType),
       resolve(parent, args) {
         return Coffeeshop.find();
-      }
+      },
     },
     comments: {
       type: new GraphQLList(CommentType),
       resolve(parent, args) {
         return Comment.find();
-      }
-    }
-  }
+      },
+    },
+  },
 });
 
 const Mutation = new GraphQLObjectType({
@@ -72,17 +68,17 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString),
         },
         coffeeshopID: {
-          type: GraphQLString
-        }
+          type: GraphQLString,
+        },
       },
       resolve(parent, args) {
         // This comment is the Mongoose model, not the Graph QL Type
         let comment = new Comment({
           text: args.text,
           coffeeshopID: args.coffeeshopID,
-        })
+        });
         return comment.save();
-      }
+      },
     },
     addCoffeeshop: {
       type: CoffeeshopType,
@@ -91,7 +87,16 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString),
         },
         image: {
-          type: GraphQLString
+          type: GraphQLString,
+        },
+        description: {
+          type: GraphQLString,
+        },
+        pros: {
+          type: GraphQLString,
+        },
+        cons: {
+          type: GraphQLString,
         },
         author: {
           type: new GraphQLNonNull(GraphQLString),
@@ -102,12 +107,15 @@ const Mutation = new GraphQLObjectType({
         let coffeeshop = new Coffeeshop({
           name: args.name,
           image: args.image,
-        })
+          description: args.description,
+          pros: args.pros,
+          cons: args.cons,
+        });
         return coffeeshop.save();
-      }
-    }
-  }
-})
+      },
+    },
+  },
+});
 
 module.exports = new GraphQLSchema({
   query: RootQuery,

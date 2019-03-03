@@ -1,18 +1,13 @@
 const graphql = require('graphql');
 const Comment = require('../models/comment');
 
-const {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLID,
-  GraphQLList,
-} = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList } = graphql;
 
 const CoffeeshopType = new GraphQLObjectType({
   name: 'Coffeeshop',
   fields: () => ({
     id: {
-      type: GraphQLID
+      type: GraphQLID,
     },
     name: {
       type: GraphQLString,
@@ -23,13 +18,22 @@ const CoffeeshopType = new GraphQLObjectType({
     image: {
       type: GraphQLString,
     },
+    description: {
+      type: GraphQLString,
+    },
+    pros: {
+      type: GraphQLString,
+    },
+    cons: {
+      type: GraphQLString,
+    },
     comments: {
       type: new GraphQLList(CommentType),
       resolve(parent, args) {
         return Comment.find({ coffeeshopID: parent.id });
-      }
-    }
-  })
+      },
+    },
+  }),
 });
 
 const CommentType = new GraphQLObjectType({
@@ -46,13 +50,13 @@ const CommentType = new GraphQLObjectType({
     },
     coffeeshopID: {
       type: GraphQLString,
-    }
-  })
+    },
+  }),
 });
 
 const types = {
   CoffeeshopType,
   CommentType,
-}
+};
 
 module.exports = types;
