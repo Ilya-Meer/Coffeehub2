@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { css } from 'aphrodite/no-important';
 import { Query } from 'react-apollo';
 
+import CommentForm from './CommentForm';
 import Page from '../../layout/Page';
 import Heading from '../../ui/Heading';
+import Subheading from '../../ui/Subheading';
 
 import { GET_SINGLE_COFFEESHOP } from '../../../queries/queries';
 
@@ -16,7 +18,7 @@ class ShowShopPage extends Component {
   static defaultProps = {};
 
   render() {
-    const { match } = this.props;
+    const { match, user } = this.props;
 
     return (
       <Query query={GET_SINGLE_COFFEESHOP} variables={{ id: match.params.id }}>
@@ -34,8 +36,17 @@ class ShowShopPage extends Component {
               </div>
               <img src={shop.image} alt="Coffeeshop" />
               <div>
+                <Subheading>Comments</Subheading>
+                {shop.comments.map(comment => (
+                  <p key={comment.author}>{comment.text}</p>
+                ))}
+              </div>
+
+              <div>
                 <Link to="/create">Add a new shop!</Link>
               </div>
+
+              <CommentForm user={user} coffeeshopID={match.params.id} />
             </Page>
           );
         }}

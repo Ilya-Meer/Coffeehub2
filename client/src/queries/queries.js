@@ -38,7 +38,7 @@ const GET_SINGLE_COFFEESHOP = gql`
 
 /* prettier-ignore */
 const ADD_COFFEESHOP = gql`
-  mutation($name: String!, $image: String, $description: String, $pros: String, $cons: String $author: String!) {
+  mutation addCoffeeshop($name: String!, $image: String, $description: String, $pros: String, $cons: String $author: String!) {
     addCoffeeshop(name: $name, image: $image, description: $description, pros: $pros, cons: $cons, author: $author) {
       name
       id
@@ -46,4 +46,12 @@ const ADD_COFFEESHOP = gql`
   }
 `;
 
-export { GET_COFFEESHOPS, GET_SINGLE_COFFEESHOP, ADD_COFFEESHOP };
+const ADD_COMMENT = gql`
+  mutation addComment($author: String!, $text: String!, $id: String) {
+    addComment(author: $author, text: $text, coffeeshopID: $id) {
+      text
+    }
+  }
+`;
+
+export { GET_COFFEESHOPS, GET_SINGLE_COFFEESHOP, ADD_COFFEESHOP, ADD_COMMENT };
