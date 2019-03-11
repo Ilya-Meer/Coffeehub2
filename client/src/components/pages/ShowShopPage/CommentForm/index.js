@@ -28,12 +28,6 @@ class CommentForm extends Component {
     const { user, coffeeshopID } = this.props;
     const { text } = this.state;
 
-    console.log({
-      author: user.userID,
-      text,
-      id: coffeeshopID,
-    });
-
     return user.userID ? (
       <Mutation mutation={ADD_COMMENT}>
         {addComment => (
@@ -42,7 +36,8 @@ class CommentForm extends Component {
               e.preventDefault();
               addComment({
                 variables: {
-                  author: user.userID,
+                  authorID: user.userID,
+                  authorDisplayName: user.userDisplayName,
                   text,
                   id: coffeeshopID,
                 },

@@ -12,7 +12,10 @@ const CoffeeshopType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
-    author: {
+    authorID: {
+      type: GraphQLString,
+    },
+    authorDisplayName: {
       type: GraphQLString,
     },
     image: {
@@ -45,7 +48,10 @@ const CommentType = new GraphQLObjectType({
     text: {
       type: GraphQLString,
     },
-    author: {
+    authorID: {
+      type: GraphQLString,
+    },
+    authorDisplayName: {
       type: GraphQLString,
     },
     coffeeshopID: {

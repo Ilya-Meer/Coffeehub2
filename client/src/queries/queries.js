@@ -9,10 +9,12 @@ const GET_COFFEESHOPS = gql`
       description
       pros
       cons
-      author
+      authorID
+      authorDisplayName
       comments {
         text
-        author
+        authorID
+        authorDisplayName
       }
     }
   }
@@ -27,10 +29,12 @@ const GET_SINGLE_COFFEESHOP = gql`
       description
       pros
       cons
-      author
+      authorID
+      authorDisplayName
       comments {
         text
-        author
+        authorID
+        authorDisplayName
       }
     }
   }
@@ -38,17 +42,18 @@ const GET_SINGLE_COFFEESHOP = gql`
 
 /* prettier-ignore */
 const ADD_COFFEESHOP = gql`
-  mutation addCoffeeshop($name: String!, $image: String, $description: String, $pros: String, $cons: String $author: String!) {
-    addCoffeeshop(name: $name, image: $image, description: $description, pros: $pros, cons: $cons, author: $author) {
+  mutation addCoffeeshop($name: String!, $image: String, $description: String, $pros: String, $cons: String, $authorID: String!, $authorDisplayName: String!) {
+    addCoffeeshop(name: $name, image: $image, description: $description, pros: $pros, cons: $cons, authorID: $authorID, authorDisplayName: $authorDisplayName) {
       name
       id
     }
   }
 `;
 
+/* prettier-ignore */
 const ADD_COMMENT = gql`
-  mutation addComment($author: String!, $text: String!, $id: String) {
-    addComment(author: $author, text: $text, coffeeshopID: $id) {
+  mutation addComment($authorID: String!, $authorDisplayName: String!, $text: String!, $id: String!) {
+    addComment(authorID: $authorID, authorDisplayName: $authorDisplayName, text: $text, coffeeshopID: $id) {
       text
     }
   }

@@ -1,34 +1,33 @@
-import React, { Component }from "react";
+import React, { Component } from 'react';
 import { firebase } from '.';
 
 const FirebaseContext = React.createContext();
 
 class FirebaseProvider extends Component {
   state = {
-    user: null,
-  }
+    userID: null,
+    userDisplayName: null,
+  };
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user : user.uid });
+        this.setState({ userID: user.uid, userDisplayName: user.displayName });
       } else {
-        this.setState({ user : null });
+        this.setState({ userID: null, userDisplayName: null });
       }
-    })
+    });
   }
 
   render() {
-    const {
-      user
-    } = this.state;
+    const { userID, userDisplayName } = this.state;
 
     return (
-      <FirebaseContext.Provider value={user}>
+      <FirebaseContext.Provider value={{ userID, userDisplayName }}>
         {this.props.children}
       </FirebaseContext.Provider>
-    )
+    );
   }
 }
 
-export {FirebaseContext, FirebaseProvider};
+export { FirebaseContext, FirebaseProvider };

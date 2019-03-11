@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const coffeeshopSchema = new mongoose.Schema({
   name: String,
   image: String,
-  author: String,
+  authorID: String,
+  authorDisplayName: String,
   description: String,
   pros: String,
   cons: String,

@@ -25,14 +25,17 @@ const AppRouter = () => (
               <PublicRoute
                 path="/login"
                 component={LoginPage}
-                loggedIn={currentUser}
+                loggedIn={currentUser.userID}
               />
               <PrivateRoute
                 path="/create"
                 component={CreateCoffeeshopPage}
-                loggedIn={currentUser}
+                loggedIn={currentUser.userID}
               />
-              <Route path="/shops/:id" component={ShowShopPage} />
+              <Route
+                path="/shops/:id"
+                render={props => <ShowShopPage {...props} user={currentUser} />}
+              />
               <Route component={NotFoundPage} />
             </Switch>
           </React.Fragment>

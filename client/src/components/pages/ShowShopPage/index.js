@@ -38,7 +38,10 @@ class ShowShopPage extends Component {
               <div>
                 <Subheading>Comments</Subheading>
                 {shop.comments.map(comment => (
-                  <p key={comment.author}>{comment.text}</p>
+                  <div key={comment.text}>
+                    <p>{comment.text}</p>
+                    <span>{`- posted by: ${comment.authorDisplayName}`}</span>
+                  </div>
                 ))}
               </div>
 

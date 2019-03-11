@@ -61,14 +61,17 @@ const Mutation = new GraphQLObjectType({
     addComment: {
       type: CommentType,
       args: {
-        author: {
+        authorID: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+        authorDisplayName: {
           type: new GraphQLNonNull(GraphQLString),
         },
         text: {
           type: new GraphQLNonNull(GraphQLString),
         },
         coffeeshopID: {
-          type: GraphQLString,
+          type: new GraphQLNonNull(GraphQLString),
         },
       },
       resolve(parent, args) {
@@ -76,6 +79,8 @@ const Mutation = new GraphQLObjectType({
         let comment = new Comment({
           text: args.text,
           coffeeshopID: args.coffeeshopID,
+          authorID: args.authorID,
+          authorDisplayName: args.authorDisplayName,
         });
         return comment.save();
       },
@@ -98,7 +103,10 @@ const Mutation = new GraphQLObjectType({
         cons: {
           type: GraphQLString,
         },
-        author: {
+        authorID: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+        authorDisplayName: {
           type: new GraphQLNonNull(GraphQLString),
         },
       },
@@ -110,6 +118,8 @@ const Mutation = new GraphQLObjectType({
           description: args.description,
           pros: args.pros,
           cons: args.cons,
+          authorID: args.authorID,
+          authorDisplayName: args.authorDisplayName,
         });
         return coffeeshop.save();
       },
