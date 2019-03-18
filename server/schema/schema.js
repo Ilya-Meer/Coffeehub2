@@ -3,6 +3,7 @@ const types = require('./types');
 
 const Coffeeshop = require('../models/coffeeshop');
 const Comment = require('../models/comment');
+const Author = require('../models/author');
 
 const { CoffeeshopType, CommentType } = types;
 
@@ -26,7 +27,7 @@ const RootQuery = new GraphQLObjectType({
         },
       },
       resolve(parent, args) {
-        return Coffeeshop.findById(args.id);
+        return Coffeeshop.findById(args.id).populate('author');
       },
     },
     comment: {
@@ -37,19 +38,32 @@ const RootQuery = new GraphQLObjectType({
         },
       },
       resolve(parent, args) {
-        return Comment.find({ coffeeshopID: parent.id });
+        return Comment.find({ coffeeshopID: parent.id }).populate('author');
       },
     },
     coffeeshops: {
       type: new GraphQLList(CoffeeshopType),
       resolve(parent, args) {
-        return Coffeeshop.find();
+        return Coffeeshop.find()
+          .populate('author')
+          .then(res => {
+            return res.forEach(shop => {
+              shop.comments.forEach(comment => {
+                console.log(Comment.find({ _id: comment.id }));
+                return Comment.find({ id: comment.id });
+              });
+              // return shop.comments.forEach(comment => {
+              //   return Comment.findById(comment.id).populate('author');
+              // });
+            });
+          })
+          .then(res => res);
       },
     },
     comments: {
       type: new GraphQLList(CommentType),
       resolve(parent, args) {
-        return Comment.find();
+        return Comment.find().populate('author');
       },
     },
   },
@@ -75,14 +89,41 @@ const Mutation = new GraphQLObjectType({
         },
       },
       resolve(parent, args) {
-        // This comment is the Mongoose model, not the Graph QL Type
-        let comment = new Comment({
-          text: args.text,
-          coffeeshopID: args.coffeeshopID,
-          authorID: args.authorID,
-          authorDisplayName: args.authorDisplayName,
-        });
-        return comment.save();
+        const createComment = author => {
+          return new Comment({
+            text: args.text,
+            coffeeshopID: args.coffeeshopID,
+            author,
+          })
+            .save()
+            .then(comment => {
+              return Coffeeshop.findByIdAndUpdate(args.coffeeshopID, {
+                $push: { comments: comment },
+              });
+            })
+            .catch(e => {
+              throw e;
+            });
+        };
+
+        Author.findOne({ id: args.authorID })
+          .then(result => {
+            if (result) {
+              return createComment(result);
+            }
+
+            const author = new Author({
+              id: args.authorID,
+              displayName: args.authorDisplayName,
+            });
+
+            return author.save().then(() => {
+              return createComment(author);
+            });
+          })
+          .catch(e => {
+            throw e;
+          });
       },
     },
     addCoffeeshop: {
@@ -111,17 +152,35 @@ const Mutation = new GraphQLObjectType({
         },
       },
       resolve(parent, args) {
-        // This coffeeshop is the Mongoose model, not the Graph QL Type
-        let coffeeshop = new Coffeeshop({
-          name: args.name,
-          image: args.image,
-          description: args.description,
-          pros: args.pros,
-          cons: args.cons,
-          authorID: args.authorID,
-          authorDisplayName: args.authorDisplayName,
-        });
-        return coffeeshop.save();
+        const createCoffeeshop = author => {
+          return new Coffeeshop({
+            name: args.name,
+            image: args.image,
+            description: args.description,
+            pros: args.pros,
+            cons: args.cons,
+            author,
+          }).save();
+        };
+
+        Author.findOne({ id: args.authorID })
+          .then(result => {
+            if (result) {
+              return createCoffeeshop(result);
+            }
+
+            const author = new Author({
+              id: args.authorID,
+              displayName: args.authorDisplayName,
+            });
+
+            return author.save().then(() => {
+              return createCoffeeshop(author);
+            });
+          })
+          .catch(e => {
+            throw e;
+          });
       },
     },
   },

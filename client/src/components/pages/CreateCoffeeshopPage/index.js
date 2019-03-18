@@ -54,7 +54,8 @@ class CreateCoffeeshopPage extends Component {
       description,
       pros,
       cons,
-      author,
+      authorID: author.userID,
+      authorDisplayName: author.userDisplayName,
     };
 
     addCoffeeshopMutation({ variables });
