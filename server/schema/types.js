@@ -12,11 +12,8 @@ const CoffeeshopType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
-    authorID: {
-      type: GraphQLString,
-    },
-    authorDisplayName: {
-      type: GraphQLString,
+    author: {
+      type: AuthorType,
     },
     image: {
       type: GraphQLString,
@@ -48,11 +45,8 @@ const CommentType = new GraphQLObjectType({
     text: {
       type: GraphQLString,
     },
-    authorID: {
-      type: GraphQLString,
-    },
-    authorDisplayName: {
-      type: GraphQLString,
+    author: {
+      type: AuthorType,
     },
     coffeeshopID: {
       type: GraphQLString,
@@ -60,7 +54,20 @@ const CommentType = new GraphQLObjectType({
   }),
 });
 
+const AuthorType = new GraphQLObjectType({
+  name: 'Author',
+  fields: () => ({
+    id: {
+      type: GraphQLString,
+    },
+    displayName: {
+      type: GraphQLString,
+    },
+  }),
+});
+
 const types = {
+  AuthorType,
   CoffeeshopType,
   CommentType,
 };
