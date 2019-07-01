@@ -9,12 +9,15 @@ const GET_COFFEESHOPS = gql`
       description
       pros
       cons
-      authorID
-      authorDisplayName
+      author {
+        id
+        displayName
+      }
       comments {
         text
-        authorID
-        authorDisplayName
+        author {
+          displayName
+        }
       }
     }
   }
@@ -29,12 +32,16 @@ const GET_SINGLE_COFFEESHOP = gql`
       description
       pros
       cons
-      authorID
-      authorDisplayName
+      author {
+        id
+        displayName
+      }
       comments {
         text
-        authorID
-        authorDisplayName
+        author {
+          id
+          displayName
+        }
       }
     }
   }

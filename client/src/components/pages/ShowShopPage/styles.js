@@ -5,4 +5,5 @@ export default StyleSheet.create({
   pageTitle: {
     margin: '2.5em 0',
   },
+  fontFamily: fontFamilyMain,
 });

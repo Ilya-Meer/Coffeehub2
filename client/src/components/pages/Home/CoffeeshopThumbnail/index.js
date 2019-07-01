@@ -2,14 +2,7 @@ import React from 'react';
 import { css } from 'aphrodite';
 import styles from './styles';
 
-const CoffeeshopThumbnail = ({
-  id,
-  name,
-  image,
-  author,
-  comments,
-  history,
-}) => {
+const CoffeeshopThumbnail = ({ id, name, image, history }) => {
   const onClick = () => {
     history.push(`/shops/${id}`);
   };
