@@ -2,7 +2,13 @@ const { Author, Coffeeshop, Comment } = require("../../models");
 
 const singleCommentResolver = async ({ _id }) => {
   try {
-    const comment = await Comment.findById(_id);
+    let comment = await Comment.findById(_id).populate("author");
+
+    comment = {
+      ...comment._doc,
+      _id: comment._id.toString()
+    };
+
     return comment;
   } catch (err) {
     console.log(err);
@@ -11,7 +17,13 @@ const singleCommentResolver = async ({ _id }) => {
 
 const singleCoffeeshopResolver = async ({ _id }) => {
   try {
-    const coffeeshop = await Coffeeshop.findById(_id).populate("author");
+    let coffeeshop = await Coffeeshop.findById(_id).populate("author");
+
+    coffeeshop = {
+      ...coffeeshop._doc,
+      _id: coffeeshop._id.toString()
+    };
+
     return coffeeshop;
   } catch (err) {
     console.log(err);
@@ -20,12 +32,20 @@ const singleCoffeeshopResolver = async ({ _id }) => {
 
 const coffeeshopsResolver = async () => {
   try {
-    const coffeeshops = await Coffeeshop.find().populate({
+    let coffeeshops = await Coffeeshop.find().populate({
       path: "author comments",
       populate: {
         path: "author"
       }
     });
+
+    coffeeshops = coffeeshops.map(shop => {
+      return {
+        ...shop._doc,
+        _id: shop._id.toString()
+      };
+    });
+
     return coffeeshops;
   } catch (err) {
     console.log(err);
@@ -34,7 +54,15 @@ const coffeeshopsResolver = async () => {
 
 const commentsResolver = async () => {
   try {
-    const comments = await Comment.find().populate("author");
+    let comments = await Comment.find().populate("author");
+
+    comments = comments.map(comment => {
+      return {
+        ...comment._doc,
+        _id: comment._id.toString()
+      };
+    });
+
     return comments;
   } catch (err) {
     console.log(err);
