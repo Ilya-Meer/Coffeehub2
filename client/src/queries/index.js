@@ -3,19 +3,20 @@ import { gql } from "apollo-boost";
 const GET_COFFEESHOPS = gql`
   {
     coffeeshops {
-      id
+      _id
       name
       image
       description
       pros
       cons
       author {
-        id
+        fbid
         displayName
       }
       comments {
         text
         author {
+          fbid
           displayName
         }
       }
@@ -24,22 +25,22 @@ const GET_COFFEESHOPS = gql`
 `;
 
 const GET_SINGLE_COFFEESHOP = gql`
-  query($id: ID) {
-    coffeeshop(id: $id) {
-      id
+  query($_id: String) {
+    coffeeshop(_id: $_id) {
+      _id
       name
       image
       description
       pros
       cons
       author {
-        id
+        fbid
         displayName
       }
       comments {
         text
         author {
-          id
+          fbid
           displayName
         }
       }
@@ -57,10 +58,19 @@ const ADD_COFFEESHOP = gql`
   }
 `;
 
-/* prettier-ignore */
 const ADD_COMMENT = gql`
-  mutation addComment($authorID: String!, $authorDisplayName: String!, $text: String!, $id: String!) {
-    addComment(authorID: $authorID, authorDisplayName: $authorDisplayName, text: $text, coffeeshopID: $id) {
+  mutation addComment(
+    $authorID: String!
+    $authorDisplayName: String!
+    $text: String!
+    $id: String!
+  ) {
+    addComment(
+      authorID: $authorID
+      authorDisplayName: $authorDisplayName
+      text: $text
+      coffeeshopID: $id
+    ) {
       text
     }
   }

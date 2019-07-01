@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { FirebaseContext } from '../../../firebase/firebaseContext';
-import { ADD_COFFEESHOP } from '../../../queries/queries';
-import { css } from 'aphrodite';
-import { graphql } from 'react-apollo';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { FirebaseContext } from "../../../firebase/firebaseContext";
+import { ADD_COFFEESHOP } from "../../../queries";
+import { css } from "aphrodite";
+import { graphql } from "react-apollo";
+import PropTypes from "prop-types";
 
-import styles from './styles';
+import styles from "./styles";
 
-import Page from '../../layout/Page';
-import Heading from '../../ui/Heading';
-import Button from '../../ui/Button';
+import Page from "../../layout/Page";
+import Heading from "../../ui/Heading";
+import Button from "../../ui/Button";
 
 class CreateCoffeeshopPage extends Component {
   state = {
-    coffeeshopName: '',
-    imageURL: '',
-    description: '',
-    pros: '',
-    cons: '',
+    coffeeshopName: "",
+    imageURL: "",
+    description: "",
+    pros: "",
+    cons: ""
   };
 
   static propTypes = {
-    onSubmit: PropTypes.func,
+    onSubmit: PropTypes.func
   };
 
   static defaultProps = {
-    onSubmit: null,
+    onSubmit: null
   };
 
   handleChange = e => {
@@ -37,7 +37,7 @@ class CreateCoffeeshopPage extends Component {
 
     this.setState(() => ({
       ...this.state,
-      ...change,
+      ...change
     }));
   };
 
@@ -55,7 +55,7 @@ class CreateCoffeeshopPage extends Component {
       pros,
       cons,
       authorID: author.userID,
-      authorDisplayName: author.userDisplayName,
+      authorDisplayName: author.userDisplayName
     };
 
     addCoffeeshopMutation({ variables });

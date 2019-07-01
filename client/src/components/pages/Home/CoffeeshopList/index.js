@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import Masonry from 'react-masonry-component';
-import CoffeeshopThumbnail from '../CoffeeshopThumbnail';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Query } from "react-apollo";
+import Masonry from "react-masonry-component";
+import CoffeeshopThumbnail from "../CoffeeshopThumbnail";
 
-import { GET_COFFEESHOPS } from '../../../../queries/queries';
+import { GET_COFFEESHOPS } from "../../../../queries";
 
 class CoffeeshopList extends Component {
   static propTypes = {
     data: PropTypes.object,
-    history: PropTypes.object,
+    history: PropTypes.object
   };
 
   static defaultProps = {
     data: null,
-    history: null,
+    history: null
   };
 
   getCoffeeshops = items => {
     const { history } = this.props;
 
     return items.map(item => (
-      <CoffeeshopThumbnail key={item.id} {...item} history={history} />
+      <CoffeeshopThumbnail key={item._id} {...item} history={history} />
     ));
   };
 
@@ -29,16 +29,18 @@ class CoffeeshopList extends Component {
     return (
       <Query query={GET_COFFEESHOPS}>
         {({ data, loading }) => {
+          console.log(data);
+          console.log(loading);
           if (loading) {
-            return <h1 style={{ color: 'white' }}>Loading data...</h1>;
+            return <h1 style={{ color: "white" }}>Loading data...</h1>;
           }
           return (
             <Masonry
               options={{
                 gutter: 20,
-                fitWidth: true,
+                fitWidth: true
               }}
-              style={{ margin: '0 auto' }}
+              style={{ margin: "0 auto" }}
             >
               {this.getCoffeeshops(data.coffeeshops)}
             </Masonry>

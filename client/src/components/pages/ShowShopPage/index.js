@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { css } from 'aphrodite/no-important';
-import { Query } from 'react-apollo';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { css } from "aphrodite/no-important";
+import { Query } from "react-apollo";
 
-import CommentForm from './CommentForm';
-import Page from '../../layout/Page';
-import Heading from '../../ui/Heading';
-import Subheading from '../../ui/Subheading';
+import CommentForm from "./CommentForm";
+import Page from "../../layout/Page";
+import Heading from "../../ui/Heading";
+import Subheading from "../../ui/Subheading";
 
-import { GET_SINGLE_COFFEESHOP } from '../../../queries/queries';
+import { GET_SINGLE_COFFEESHOP } from "../../../queries";
 
-import styles from './styles';
+import styles from "./styles";
 
 class ShowShopPage extends Component {
   static propTypes = {};
@@ -21,10 +21,12 @@ class ShowShopPage extends Component {
     const { match, user } = this.props;
 
     return (
-      <Query query={GET_SINGLE_COFFEESHOP} variables={{ id: match.params.id }}>
+      <Query query={GET_SINGLE_COFFEESHOP} variables={{ _id: match.params.id }}>
         {({ data, loading }) => {
+          console.log(data);
+
           if (loading) {
-            return <h1 style={{ color: 'white' }}>Loading data...</h1>;
+            return <h1 style={{ color: "white" }}>Loading data...</h1>;
           }
 
           const { coffeeshop: shop } = data;

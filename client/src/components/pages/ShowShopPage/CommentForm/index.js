@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'aphrodite';
-import { Mutation } from 'react-apollo';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { css } from "aphrodite";
+import { Mutation } from "react-apollo";
 
-import Button from '../../../ui/Button';
+import Button from "../../../ui/Button";
 
-import { ADD_COMMENT } from '../../../../queries/queries';
+import { ADD_COMMENT } from "../../../../queries";
 
-import styles from './styles';
+import styles from "./styles";
 
 class CommentForm extends Component {
   static propTypes = {
     user: PropTypes.object,
-    coffeeshopID: PropTypes.string,
+    coffeeshopID: PropTypes.string
   };
 
   static defaultProps = {
     user: null,
-    coffeeshopID: '',
+    coffeeshopID: ""
   };
 
   state = {
-    text: '',
+    text: ""
   };
 
   render() {
@@ -39,8 +39,8 @@ class CommentForm extends Component {
                   authorID: user.userID,
                   authorDisplayName: user.userDisplayName,
                   text,
-                  id: coffeeshopID,
-                },
+                  id: coffeeshopID
+                }
               });
             }}
           >

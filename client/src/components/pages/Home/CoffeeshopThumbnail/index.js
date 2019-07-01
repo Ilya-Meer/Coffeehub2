@@ -1,10 +1,10 @@
-import React from 'react';
-import { css } from 'aphrodite';
-import styles from './styles';
+import React from "react";
+import { css } from "aphrodite";
+import styles from "./styles";
 
-const CoffeeshopThumbnail = ({ id, name, image, history }) => {
+const CoffeeshopThumbnail = ({ _id, name, image, history }) => {
   const onClick = () => {
-    history.push(`/shops/${id}`);
+    history.push(`/shops/${_id}`);
   };
 
   return (

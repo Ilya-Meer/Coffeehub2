@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { css } from 'aphrodite/no-important';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { css } from "aphrodite/no-important";
 
-import Page from '../../layout/Page';
-import CoffeeshopList from './CoffeeshopList';
-import Heading from '../../ui/Heading';
+import Page from "../../layout/Page";
+import CoffeeshopList from "./CoffeeshopList";
+import Heading from "../../ui/Heading";
 
-import styles from './styles';
+import styles from "./styles";
 
 class Home extends Component {
   static propTypes = {
-    history: PropTypes.object,
+    history: PropTypes.object
   };
 
   static defaultProps = {
-    history: null,
+    history: null
   };
 
   render() {
