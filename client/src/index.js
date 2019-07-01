@@ -1,14 +1,14 @@
-import React from 'react';
-import { render } from 'react-dom';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-import AppRouter, { history } from './routes';
-import { firebase } from './firebase';
-import { FirebaseProvider } from './firebase/firebaseContext';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import { render } from "react-dom";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import AppRouter, { history } from "./routes";
+import { firebase } from "./firebase";
+import { FirebaseProvider } from "./firebase/firebaseContext";
+import * as serviceWorker from "./serviceWorker";
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: "http://localhost:4000/graphql"
 });
 
 const app = (
@@ -19,7 +19,7 @@ const app = (
   </FirebaseProvider>
 );
 
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 
 let hasRendered = false;
 
@@ -33,11 +33,11 @@ const renderApp = () => {
 render(
   <div
     style={{
-      width: '100vw',
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+      width: "100vw",
+      height: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
     }}
   >
     <img src="/images/loader.gif" alt="Loader" />
@@ -54,7 +54,7 @@ firebase.auth().onAuthStateChanged(user => {
       .signOut()
       .then(() => {
         renderApp();
-        history.push('/');
+        history.push("/");
       });
   }
 });

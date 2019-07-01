@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { firebase } from '.';
+import React, { Component } from "react";
+import { firebase } from ".";
 
 const FirebaseContext = React.createContext();
 
 class FirebaseProvider extends Component {
   state = {
     userID: null,
-    userDisplayName: null,
+    userDisplayName: null
   };
 
   componentDidMount() {
