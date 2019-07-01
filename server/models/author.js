@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // SCHEMA SETUP
 const authorSchema = new mongoose.Schema({
-  id: String,
+  fbid: String,
   displayName: String,
 });
 
