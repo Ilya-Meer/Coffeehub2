@@ -28,8 +28,10 @@ class Home extends Component {
           <p className={css(styles.tagline)}>Browse all coffeeshops.</p>
         </div>
         <CoffeeshopList history={history} />
-        <div>
-          <Link to="/create">Add a new shop!</Link>
+        <div className={css(styles.indented)}>
+          <Link className={css(styles.link)} to="/create">
+            Add a new shop!
+          </Link>
         </div>
       </Page>
     );

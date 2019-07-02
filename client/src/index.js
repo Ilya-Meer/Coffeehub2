@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import "antd/dist/antd.css";
 import AppRouter, { history } from "./routes";
 import { firebase } from "./firebase";
 import { FirebaseProvider } from "./firebase/firebaseContext";

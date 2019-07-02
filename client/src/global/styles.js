@@ -1,6 +1,7 @@
 // layout
 
 export const baseSpacingUnit = 10;
+export const indentWidth = "90%";
 
 // fonts
 
@@ -14,7 +15,9 @@ export const colours = {
   navy: "#3A434E",
   grey: "#C4C4C4",
   white: "#FFFFFF",
-  dark: "#000000"
+  dark: "#000000",
+  brown_dark: "#2e211a",
+  brown_light: "#764922"
 };
 
 // gradient

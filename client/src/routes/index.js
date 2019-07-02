@@ -1,24 +1,27 @@
-import React from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
-import Header from '../components/layout/Header';
-import Home from '../components/pages/Home';
-import CreateCoffeeshopPage from '../components/pages/CreateCoffeeshopPage';
-import ShowShopPage from '../components/pages/ShowShopPage';
-import NotFoundPage from '../components/pages/NotFoundPage';
-import LoginPage from '../components/pages/LoginPage';
-import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
-import { FirebaseContext } from '../firebase/firebaseContext';
+import React from "react";
+import { Router, Switch, Route } from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
+import { Layout } from "antd";
+import Header from "../components/layout/Header";
+import Home from "../components/pages/Home";
+import CreateCoffeeshopPage from "../components/pages/CreateCoffeeshopPage";
+import ShowShopPage from "../components/pages/ShowShopPage";
+import NotFoundPage from "../components/pages/NotFoundPage";
+import LoginPage from "../components/pages/LoginPage";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
+import { FirebaseContext } from "../firebase/firebaseContext";
 
 export const history = createHistory();
+
+const thing = <h1>asdf</h1>;
 
 const AppRouter = () => (
   <FirebaseContext.Consumer>
     {currentUser => {
       return (
         <Router history={history}>
-          <React.Fragment>
+          <Layout style={{ height: "100vh" }}>
             <Header history={history} />
             <Switch>
               <Route exact path="/" component={Home} />
@@ -38,7 +41,19 @@ const AppRouter = () => (
               />
               <Route component={NotFoundPage} />
             </Switch>
-          </React.Fragment>
+            <Layout.Footer style={{ textAlign: "center" }}>
+              <span>
+                {`Coffeehub ©2019 Created by `}
+                <a
+                  href="http://ilyameerovich.com"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Ilya Meerovich
+                </a>
+              </span>
+            </Layout.Footer>
+          </Layout>
         </Router>
       );
     }}
